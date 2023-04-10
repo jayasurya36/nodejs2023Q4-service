@@ -1,10 +1,10 @@
-const uuid = require('uuid')
+const uuid = require('uuid').v4()
 const mongoose = require('mongoose');
 const albumSchema = mongoose.Schema({
-    _id: { type: String, default: uuid.v4() },
+    _id: { type: String, default: () => uuid.v4() },
     name: { type: String, required: true },
-    year : { type: Number, required: true },
-    artistId : {type : String , default: null}
+    year: { type: Number, required: true },
+    artistId: { type: String, default: null }
 });
 
-module.exports = mongoose.model('AlbumSchema', albumSchema);
+module.exports = mongoose.model('Album', albumSchema);
