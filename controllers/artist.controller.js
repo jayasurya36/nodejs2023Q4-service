@@ -1,5 +1,4 @@
 const Artist = require('../models/artist.model');
-const bcrypt = require('bcrypt');
 let artistController = {}
 artistController.getAll = async (req, res) => {
     try {
@@ -34,8 +33,10 @@ artistController.createArtist = async (req, res) => {
 artistController.updateArtist = async (req, res) => {
     try {
         const artist = await Artist.findById(req.params.id);
-        if(artist){
-            const returnVal = Artist.updateOne({ _id : req.params.id} , req.body);
+        if(artist !== null){
+            const returnVal = Artist.updateOne({_id : req.params.id} , {
+                ...req.body
+            })
             res.status(200).send(returnVal);
         }else{
             res.status(404).send('Artist Not found');
