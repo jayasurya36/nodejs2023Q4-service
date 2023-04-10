@@ -3,8 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const app = express();
+const routes = require('./routes/user.routes');
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended : false}));
+
+app.use('/' , routes);
 
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log('Connected to database successfully')
@@ -12,6 +15,6 @@ mongoose.connect(process.env.DB_URL).then(()=>{
     console.log(err.message)
 })
 
-app.listen(5000 , ()=>{
-    console.log('Server listening to the port 5000');
+app.listen(process.env.PORT , ()=>{
+    console.log(`Server listening to the port ${process.env.PORT}`);
 })
