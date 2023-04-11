@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const favoritesSchema = mongoose.Schema({
-    artists:[String],
-    albums : [String],
-    tracks : [String]
+    _id: { type: String },
+    artists:{type :  [String]},
+    albums: {type :  [String]},
+    tracks: {type :  [String]}
 })
 
-module.exports = mongoose.model('Favorites' , favoritesSchema)
+module.exports = mongoose.model('Favorites', favoritesSchema)

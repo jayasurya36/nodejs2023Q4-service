@@ -12,7 +12,7 @@ albumController.getById = async (req, res) => {
     try {
         let album = await Album.findOne({ _id: req.params.id });
         if (album === null) { res.status(404).send('Album not found'); }
-        else res.status(200).send(artist)
+        else res.status(200).send(album)
     } catch (err) {
         res.status(500).send(err.message)
     }
@@ -33,14 +33,9 @@ albumController.createAlbum = async (req, res) => {
 albumController.updateAlbum = async (req, res) => {
     try {
         const album = await Album.findById(req.params.id);
-        if(album !== null){
-            const returnVal = Album.updateOne({_id : req.params.id} , {
-                ...req.body
-            })
-            res.status(200).send(returnVal);
-        }else{
-            res.status(404).send('Album Not found');
-        }
+        if(!album) return res.status(404).send({msg : "Album not found"});
+        await Album.findByIdAndUpdate(req.params.id , req.body);
+        res.send({msg : "Album updated successfully"});
     } catch (err) {
         res.status(500).send(err.message)
     }

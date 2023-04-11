@@ -4,7 +4,7 @@ const trackSchema = mongoose.Schema({
     _id: { type: String, default: ()=>uuid.v4() },
     name: { type: String, required: true },
     artistId : { type: String, default : null},
-    albumId : { type: Number , default : null},
+    albumId : { type: String , default : null},
     duration : {type : Number , required : true}
 });
 

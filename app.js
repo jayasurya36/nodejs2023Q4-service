@@ -7,6 +7,7 @@ const userroutes = require('./routes/user.routes');
 const artistroutes = require('./routes/artist.routes');
 const trackroutes = require('./routes/track.routes');
 const albumroutes = require('./routes/album.routes');
+const favouriteRoutes = require('./routes/favourite.route');
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended : false}));
@@ -15,6 +16,7 @@ app.use('/' , userroutes);
 app.use('/' , artistroutes);
 app.use('/' , trackroutes);
 app.use('/' , albumroutes);
+app.use('/' , favouriteRoutes);
 
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log('Connected to database successfully')
