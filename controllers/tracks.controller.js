@@ -33,14 +33,9 @@ TrackController.createTrack = async (req, res) => {
 TrackController.updateTrack = async (req, res) => {
     try {
         const track = await Track.findById(req.params.id);
-        if(track !== null){
-            const returnVal = Track.updateOne({_id : req.params.id} , {
-                ...req.body
-            })
-            res.status(200).send(returnVal);
-        }else{
-            res.status(404).send('Artist Not found');
-        }
+        if(!track) return res.status(404).send({msg : "Track not found"});
+        await Track.findByIdAndUpdate(req.params.id , req.body);
+        res.status(200).send({msg : "Track Updated successfully"});
     } catch (err) {
         res.status(500).send(err.message)
     }

@@ -1,4 +1,4 @@
-const uuid = require('uuid').v4()
+const uuid = require('uuid')
 const mongoose = require('mongoose');
 const albumSchema = mongoose.Schema({
     _id: { type: String, default: () => uuid.v4() },
